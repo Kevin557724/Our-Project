@@ -1,18 +1,35 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
+using UnityEngine.Enemy;
 
 public class Enemy : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
+        public NavMeshAgent agent;
         
-    }
+        public Transform player;
+        
+        public LayerMask whatIsGround, whatIsPlayer;
+        
+        //Patroling
+        public Vector3 walkPoint;
+        bool walkPointSet;
+        public float walkPointRange;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+        //Attacking
+        public float timeBetweenAttacks;
+        bool alreadyAttacked;
+
+        //States
+        public float sightRange, attackingRange;
+        public bool playerInSightRange, playerInAttackRange;
+
+        private void Awake()
+        {
+            player = GameObject.Find("PlayerObj").transform;
+            agent = GetComponent<NavMeshAgent>();
+        }
+
+
+
 }
+
