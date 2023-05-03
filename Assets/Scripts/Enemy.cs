@@ -1,6 +1,6 @@
 
 using UnityEngine;
-using UnityEngine.Enemy;
+using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
