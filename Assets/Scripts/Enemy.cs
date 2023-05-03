@@ -4,12 +4,14 @@ using UnityEngine.Enemy;
 
 public class Enemy : MonoBehaviour
 {
-    public NavMeshAgent agent;    
+    public UnityEngine.AI.NavMeshAgent agent;    
     
     public Transform player;
     
     public LayerMask whatIsGround, whatIsPlayer;
         
+    public float health;
+
     //Patroling
     public Vector3 walkPoint;
     bool walkPointSet;
@@ -18,7 +20,7 @@ public class Enemy : MonoBehaviour
     //Attacking
     public float timeBetweenAttacks;
     bool alreadyAttacked;
-
+    public GameObject projectile;
     //States
     public float sightRange, attackingRange;
     public bool playerInSightRange, playerInAttackRange;
@@ -26,7 +28,7 @@ public class Enemy : MonoBehaviour
     private void Awake()
     {
         player = GameObject.Find("PlayerObj").transform;
-        agent = GetComponent<NavMeshAgent>();
+        agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
     }
 
     private void Update()
@@ -76,9 +78,16 @@ public class Enemy : MonoBehaviour
 
         transform.LookAt(player);
     
+        
         if(!alreadyAttacked)
         {
+            ///Attack code here
+            Rigidbody rb = Instaniate(projectile, transform.position, Quaternion.identity).GetComponent<Rigidbody>();
             
+            rb.AddForce(transform.forward * 32f, ForceMode.Impulse);            
+            rb.AddForce(transform.up * 8f, ForceMode.Impulse);
+            
+            ///
             
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
@@ -87,6 +96,24 @@ public class Enemy : MonoBehaviour
     private void ResetAttack()
     {
         alreadyAttacked = false;
+    }
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+
+        if (health <= 0) Invoke(nameof(DestroyEnemy), .5f);
+    }
+    private void DestroyEnemy()
+    {
+        Destroy(GameObject);
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attackingRange);
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, sightRange);
     }
 }
 
