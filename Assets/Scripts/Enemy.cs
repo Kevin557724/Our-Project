@@ -4,7 +4,7 @@ using UnityEngine.Enemy;
 
 public class Enemy : MonoBehaviour
 {
-    public NavMeshAgent agent;    
+    public UnityEngine.AI.NavMeshAgent agent;    
     
     public Transform player;
     
@@ -26,7 +26,7 @@ public class Enemy : MonoBehaviour
     private void Awake()
     {
         player = GameObject.Find("PlayerObj").transform;
-        agent = GetComponent<NavMeshAgent>();
+        agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
     }
 
     private void Update()
