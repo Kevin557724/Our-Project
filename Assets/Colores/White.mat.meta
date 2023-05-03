@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/M16 A1/M16 A1.unity.meta
+guid: 10657dd30ce9f41e8ae33622ca46f5e8
+DefaultImporter:
+========
 guid: ee24a1e14c64a43e987533c23dbb06e6
 NativeFormatImporter:
+>>>>>>>> 65c9bf2ec2df9d9667ce40ea42805667db9f5bf8:Assets/Colores/White.mat.meta
   externalObjects: {}
   mainObjectFileID: 2100000
   userData: 
